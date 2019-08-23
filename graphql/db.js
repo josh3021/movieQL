@@ -1,6 +1,7 @@
 import {
   filterMatchedMovies,
   filterUnmatchedMovies,
+  getIndexOfTargetMovie,
   getLastElementOfMovies
 } from './db.util';
 
@@ -42,10 +43,25 @@ const createMovie = ({
   return newMovie;
 }
 
-const retrieveMoviesById = (id) => {
-  console.log(id)
-  const filteredMovies = filterMatchedMovies(movies, id);
-  return filteredMovies[0];
+const retrieveMoviesById = (id) => filterMatchedMovies(movies, id)[0];
+
+const updateMovie = ({
+  id,
+  name,
+  score,
+  rate
+}) => {
+  const targetMovieIndex = getIndexOfTargetMovie(movies, id);
+  if (targetMovieIndex === -1) {
+    return false
+  } else {
+    Object.assign(movies[targetMovieIndex], {
+      name,
+      score,
+      rate
+    });
+    return movies[targetMovieIndex];
+  }
 }
 
 const deleteMovieById = ({
@@ -64,5 +80,6 @@ export {
   movies,
   createMovie,
   retrieveMoviesById,
+  updateMovie,
   deleteMovieById
 };

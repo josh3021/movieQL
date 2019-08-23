@@ -2,6 +2,7 @@ import {
   movies,
   createMovie,
   retrieveMoviesById,
+  updateMovie,
   deleteMovieById
 } from './db';
 
@@ -19,6 +20,18 @@ const resolvers = {
       score,
       rate
     }) => createMovie({
+      name,
+      score,
+      rate
+    }),
+
+    updateMovie: (_, {
+      id,
+      name,
+      score,
+      rate
+    }) => updateMovie({
+      id,
       name,
       score,
       rate
