@@ -1,12 +1,14 @@
-const examplePerson = {
-  name: "John Doe",
-  age: 14,
-  sex: "male"
-}
+import {
+  people,
+  findPersonById
+} from './db';
 
 const resolvers = {
   Query: {
-    person: () => examplePerson
+    people: () => people,
+    person: (_, {
+      id
+    }) => findPersonById(id) // resolvers(obj, args, context, info)
   }
 }
 
