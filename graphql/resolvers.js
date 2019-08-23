@@ -1,14 +1,34 @@
 import {
-  people,
-  findPersonById
+  movies,
+  createMovie,
+  retrieveMoviesById,
+  deleteMovieById
 } from './db';
 
 const resolvers = {
   Query: {
-    people: () => people,
-    person: (_, {
+    movies: () => movies,
+    movie: (_, {
       id
-    }) => findPersonById(id) // resolvers(obj, args, context, info)
+    }) => retrieveMoviesById(id) // resolvers(obj, args, context, info)
+  },
+
+  Mutation: {
+    createMovie: (_, {
+      name,
+      score,
+      rate
+    }) => createMovie({
+      name,
+      score,
+      rate
+    }),
+
+    deleteMovie: (_, {
+      id
+    }) => deleteMovieById({
+      id
+    })
   }
 }
 
